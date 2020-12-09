@@ -1,6 +1,24 @@
+##### Supplementary functions for MMA867 Assignment 2
+##### Written by Nick Nguyen for Team Collingwood
+##### Last updated: May 8, 2019 (code); Dec 2, 2020 (documentation)
+
 # One function to rule them all
 rh <- function(data, partitions, period) {
-	#(msts object, int, int) -> NoneType
+	# (msts object, int, int) -> NoneType
+  # 
+  # Performs a rolling horizon test on the time series (msts) object
+  # using two models: TBATS and linear regression + ARIMA on residuals
+  # Specifically, it splits the data into partitions,
+  # then trains the models on the data prior to each partition,
+  # then generate predictions for data in the partition to calculate RMSE
+  # Repeat for each partition.
+  # Prints the mean and standard deviation RMSE into the console
+  #
+  # Parameters:
+  #   data: the time series object
+  #   partitions: the number of partitions to split the data into
+  #   period: the seasonality period (tune this to create different models)
+
 	freq <- max(attr(data, 'msts'))
 	accuracy.tbats <- 0
 	accuracy.arima <- 0
@@ -36,6 +54,9 @@ Mean: ",mean(accuracy.tbats),"\nStandard Deviation: ",sd(accuracy.tbats),'\n', s
 RMSE for lm + ARIMA with ",partitions," partitions of ",period," periods:
 Mean: ",mean(accuracy.arima),"\nStandard Deviation: ",sd(accuracy.arima),'\n', sep = '')
 }
+
+##### OLD FUNCTIONS #####
+## These are old functions kept here for fun. Their functionality has been replaced by the rh() function.
 
 # Rolling Horizon TBATS Fun -----------------------------------------------------------------
 rh.tbats <- function(data, partitions, period) {
